@@ -1,0 +1,16 @@
+{
+    "name": "viniciusscg/app-php-catalog-video",
+    "description": "App With PHP - Catalog Video",
+    "authors": [
+        {
+            "name": "Vinicius Carvalho",
+            "email": "vinicius.s.carvalho23@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/Core/"
+        }
+    },
+    "require": {}
+}
