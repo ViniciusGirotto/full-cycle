@@ -7,8 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class CategoryUnitTest extends TestCase
 {
-    public function testAttributes()
-    {
+    public function testAttributes(){
         $category = new Category(
             name: 'New Category',
             description: 'Category description',
@@ -40,5 +39,27 @@ class CategoryUnitTest extends TestCase
         $category->desable();
 
         $this->assertFalse($category->getIsActive());
+    }
+
+    public function testUpdate(){
+
+        $uuid = 'hash.uuid.value';
+
+        $category = new Category(
+            id: $uuid,
+            name: 'New Category',
+            description: 'Category description',
+            isActive: true
+        );
+
+        $category->update(
+            name: 'Updated Category',
+            isActive: false
+        );
+
+        $this->assertEquals('Updated Category', $category->getName());
+        $this->assertEquals('Updated description', $category->getDescription());
+        $this->assertFalse($category->getIsActive());
+        
     }
 }
