@@ -3,6 +3,7 @@
 namespace Core\Domain\Entity;
 
 use Core\Domain\Entity\Traits\MethodsMagicsTrait;
+use Core\Domain\Exception\EntityValidationException;
 
 class Category
 {
@@ -14,7 +15,9 @@ class Category
         protected string $name = '',
         protected string $description = '',
         protected bool $isActive = true,
-    ) {}
+    ) {
+        $this->validate();
+    }
 
     public function activate(): void
     {
@@ -31,6 +34,20 @@ class Category
         $this->name = $name;
         $this->description = $description ?? $this->description;
         $this->isActive = $isActive;
+
+        $this->validate();
+    }
+
+    public function validate(){
+        if(empty($this->name)){
+            throw new EntityValidationException('Name invalid');
+        }
+        if(strlen($this->name) < 3 && strlen($this->name) > 100){
+            throw new EntityValidationException('Name invalid');
+        }
+        if(empty($this->description) && strlen($this->description) < 10 && strlen($this->description) > 255){
+            throw new EntityValidationException('Description invalid');
+        }
     }
 
 }
